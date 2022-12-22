@@ -11,13 +11,26 @@
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
    <div id="app">
         <div style="height:100vh;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg">
-            <form @submit.prevent='submitForm'>
-                <label for="name">Nama:</label><br>
-                <input type="text" id="name" v-model="name"><br>
-                <label for="jabatan">Jabatan:</label><br>
-                <input type="text" id="jabatan" v-model="jabatan"><br><br>
-                <button type="submit">Kirim</button>
-            </form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="p-3">
+                        <a href="./list-tamu.html" class="ml-2">
+                            <button type="button" class="btn btn-sm btn-dark ">Generate QR</button>
+                        </a>
+                        <a href="./scan.html" class="ml-2">
+                            <button type="button" class="btn btn-sm btn-dark ">Scan QR</button>
+                        </a>
+                    </div>
+                    <form @submit.prevent='submitForm'>
+                        <label for="name">Nama:</label><br>
+                        <input type="text" id="name" v-model="name"><br>
+                        <label for="jabatan">Jabatan:</label><br>
+                        <input type="text" id="jabatan" v-model="jabatan"><br><br>
+                        <button type="submit">Kirim</button>
+                    </form>
+
+                </div>
+            </div>
         </div>
    </div>
    <script type="module">
