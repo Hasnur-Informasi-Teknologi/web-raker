@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./all.css">
+</head>
+<body>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"></script>
+   <div id="app">
+        <!-- <div id="reader" style="height:300px;width:100vw;" class=""></div> -->
+        <div style="width: 500px" id="reader"></div>
+        {{result}}
+   </div>
+   <script type="module">
+    import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
+    import  'https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js';
+    const firebaseConfig = {
+        apiKey: "AIzaSyCmRzJqD28EwB26YvKyLo07V7DxzxR08J8",
+        authDomain: "raker-5a160.firebaseapp.com",
+        projectId: "raker-5a160",
+        storageBucket: "raker-5a160.appspot.com",
+        messagingSenderId: "1073917849528",
+        appId: "1:1073917849528:web:07d3551851513bb16ca94d"
+    };
+    const app=firebase.initializeApp(firebaseConfig)
+    const db = app.firestore();
+     const { createApp } = Vue
+     createApp({
+        data(){
+            return{
+                result:''
+            }
+        },
+       methods: {
+        startScanner(){
+            let that=this;
+            that.$forceUpdate();
+            setTimeout(() => {
+                var html5QrcodeScanner = new Html5QrcodeScanner(
+                    "reader", { fps: 10, qrbox: 250 });
+                        
+                function onScanSuccess(decodedText, decodedResult) {
+                    db.collection(`qr`).doc('WVBWwHV1Qjq6d73BGGgO').set({id_qr:decodedText},{merge:true}).then(res=>{
+                        console.log('berhasil')
+                    }).catch(err=>{
+                        console.log(err.message)
+                    })
+                }
+
+                html5QrcodeScanner.render(onScanSuccess);
+            }, 1000);
+            }
+       },
+       mounted() {
+            this.startScanner();
+       },
+     }).mount('#app')
+   </script>
+      
+</body>
+</html>

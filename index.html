@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./all.css">
+</head>
+<body>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <div id="app">
+        <div style="height:100vh;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg">
+            <div style="width:100%;" class="text-center">
+                <p class="my-0 font-semibold text-2xl animate__animated  tamu">
+                    {{tamu['nama']}}
+                </p>
+                <p class="my-0 font-semibold text-2xl animate__animated tamu">
+                    {{tamu['jabatan']}}
+                </p>
+            </div>
+        </div>
+   </div>
+   <script type="module">
+    import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
+    import  'https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js';
+    const firebaseConfig = {
+        apiKey: "AIzaSyCmRzJqD28EwB26YvKyLo07V7DxzxR08J8",
+        authDomain: "raker-5a160.firebaseapp.com",
+        projectId: "raker-5a160",
+        storageBucket: "raker-5a160.appspot.com",
+        messagingSenderId: "1073917849528",
+        appId: "1:1073917849528:web:07d3551851513bb16ca94d"
+    };
+    const app=firebase.initializeApp(firebaseConfig)
+    const db = app.firestore();
+     const { createApp } = Vue
+     createApp({
+        data(){
+            return{
+                tamu:[]
+            }
+        },
+       methods: {
+        async getData(){
+            let that=this;
+            db.collection('qr').doc('WVBWwHV1Qjq6d73BGGgO').onSnapshot(res=>{
+                let id =res.data().id_qr;
+                db.collection('tamu').doc(res.data().id_qr).onSnapshot(res2=>{
+                    let data=res2.data()
+                    that.tamu= data
+                    document.querySelectorAll('.tamu').forEach(e=>{
+                        e.classList.toggle('animate__backInDown')
+                    })
+                    setTimeout(() => {
+                        document.querySelectorAll('.tamu').forEach(e=>{
+                            e.classList.toggle('animate__backInDown')
+                        })                        
+                    }, 1000);
+                })
+            })
+        }
+       },
+       mounted() {
+        this.getData();
+       },
+     }).mount('#app')
+   </script>
+      
+</body>
+</html>
