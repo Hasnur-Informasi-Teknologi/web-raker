@@ -5,25 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./all.css">
 </head>
 <body>
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
    <div id="app">
-        <!-- <div style="height:100vh;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg foto"> -->
-        <div style="height:100vh;" class="foto text-center">
-            <h1 class="tamu animate__animated ">{{tamu['nama']}} - {{tamu['jabatan']}}</h1>
-            <!-- <h1>{{tamu['jabatan']}}</h1> -->
-            <!-- <div style="width:100%;" class="text-center"> -->
-                <!-- <p class="my-0 font-semibold text-2xl animate__animated  tamu">
-                    {{tamu['nama']}}
-                </p>
-                <p class="my-0 font-semibold text-2xl animate__animated tamu">
-                    {{tamu['jabatan']}}
-                </p> -->
-
-            <!-- </div> -->
+        <div style="height:100vh;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg">
+            <form @submit.prevent='submitForm'>
+                <label for="name">Nama:</label><br>
+                <input type="text" id="name" v-model="name"><br>
+                <label for="jabatan">Jabatan:</label><br>
+                <input type="text" id="jabatan" v-model="jabatan"><br><br>
+                <button type="submit">Kirim</button>
+            </form>
         </div>
    </div>
    <script type="module">
@@ -42,8 +36,9 @@
      const { createApp } = Vue
      createApp({
         data(){
-            return{
-                tamu:[]
+            return {
+                name: '',
+                jabatan: ''
             }
         },
        methods: {
@@ -63,6 +58,15 @@
                         })                        
                     }, 1000);
                 })
+            })
+        },
+        submitForm(){
+            // CREATE
+            db.collection(`tamu`).doc().set({nama:this.name,jabatan:this.jabatan},{merge:true}).then(res=>{
+                this.name='';
+                this.jabatan='';
+            }).catch(err=>{
+                console.log(err.message)
             })
         }
        },
