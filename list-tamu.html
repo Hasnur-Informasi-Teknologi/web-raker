@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./all.css">
+</head>
+<body>
+   <script src="./qrcode.min.js"></script>
+   <script src="./htmlcanvas.js"></script>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <div id="app">
+        <div v-if="showqr">
+            <div >
+                <div class="row">
+                    <div id="capture" class="col-sm-3 shadow p-2 rounded-lg text-center">
+                        <h4 style="color: #000; ">INVITATION CARD !</h4>
+                        <p class="text-sm">You're cordially invited to <br> HIT DIGITAL Annual <br> Meeting</p>
+                        <table class="text-center ml-4">
+                            <tr>
+                                <td class="font-semibold">When</td>
+                                <td class="my-2">:</td>
+                                <td>13 Jan 2022 19.00 WIB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Where</td>
+                                <td class="my-2">:</td>
+                                <td>Aula Hote XXX</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Attire</td>
+                                <td class="my-2">:</td>
+                                <td>Formal Batik</td>
+                            </tr>
+                        </table>
+                        <div class="text-center">
+                            <div id="qrcode" class="text-center" style="margin-left:90px;width:100px; height:100px; margin-top:15px;"></div>
+                        </div>
+                        <p>(Show the QR code during registration)</p>
+                        <p class="mt-3 text-lg font-semibold">SEE YOU THERE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="row justify-content-center">
+                <div class="col-sm-6 p-4">
+                    <br>
+                    <p class="text-sm font-semibold text-center">Generate Kartu/QR Undangan !</p>
+                    <hr>
+                    <div v-for="(item, index) in tamu" :key="index+'tamu'" class="my-2">
+                        <div @click="showQR" class="my-0 hover:bg-blue-400 cursor-pointer font-semibold shadow rounded-lg p-3 animate__animated  tamu">
+                            {{item['nama']}} -  {{item['jabatan']}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+   <script type="module">
+    import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
+    import  'https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js';
+    const firebaseConfig = {
+        apiKey: "AIzaSyCmRzJqD28EwB26YvKyLo07V7DxzxR08J8",
+        authDomain: "raker-5a160.firebaseapp.com",
+        projectId: "raker-5a160",
+        storageBucket: "raker-5a160.appspot.com",
+        messagingSenderId: "1073917849528",
+        appId: "1:1073917849528:web:07d3551851513bb16ca94d"
+    };
+    const app=firebase.initializeApp(firebaseConfig)
+    const db = app.firestore();
+     const { createApp } = Vue
+     createApp({
+        data(){
+            return{
+                tamu:[],
+                showqr:false
+            }
+        },
+       methods: {
+        async getData(){
+            let that=this;
+            db.collection('tamu').onSnapshot(res2=>{
+                let data = res2.docs.map(e=>e.data())
+                that.tamu= data
+            })
+        },
+        showQR(){
+            this.showqr=true;
+            setTimeout(() => {
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width : 100,
+                    height : 100
+                });
+                qrcode.makeCode('taufik akbar maliki');
+                setTimeout(() => {
+                    html2canvas(document.querySelector("#capture")).then(canvas => {
+                        var link = document.createElement('a');
+                        link.download = 'filename.png';
+                        link.href = canvas.toDataURL()
+                        link.click();
+                        this.showqr=false;
+                    });
+                }, 2000);
+            }, 1000);
+        }
+       },
+       mounted() {
+        this.getData();
+       },
+     }).mount('#app')
+   </script>
+      
+</body>
+</html>
