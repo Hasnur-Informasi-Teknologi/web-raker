@@ -10,14 +10,42 @@
 </head>
 <body >
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
    <div id="app">
-       <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
-        <img src="assets/background.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
+       <div v-if="slide" style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
+            <img src="assets/background.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
             <div style="width:100%;" class="text-center">
                 <br>
                 <br>
-                <h1 class="tamu animate__animated ">{{tamu['nama']}} <br> {{tamu['jabatan']}}</h1>
+                <div class="animate__animated animate__bounce animate__infinite animasi">
+                    <h1 class="animate__animated animate__fadeInLeftBig">{{tamu['nama']}} </h1>
+                    <h1 class="animate__animated animate__backInDown">{{tamu['jabatan']}}</h1>
+                </div>
             </div>
+    </div>
+    <div v-show="!slide" style="height:100vh;">
+        <div v-if="listTamu.length>0" class="splide  "  role="group" aria-label="Splide Basic HTML Example">
+            <div class="splide__track" >
+                  <ul class="splide__list">
+                      <li class="splide__slide"  v-for="(item, index) in listTamu" :key="index+'listamu'">
+                        <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
+                                <img src="assets/background.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
+                                <div style="width:100%;" class="text-center">
+                                    <br>
+                                    <br>
+                                    <div class="animate__animated animate__bounce animate__infinite animasi">
+                                        <h1 class="animate__animated animate__fadeInLeftBig">{{item['nama']}} </h1>
+                                        <h1 class="animate__animated animate__backInDown">{{item['jabatan']}}</h1>
+                                    </div>
+                                </div>
+                        </div>
+                      </li>
+                  </ul>
+            </div>
+          </div>
+       </div>
    </div>
    <script type="module">
     import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
@@ -36,7 +64,9 @@
      createApp({
         data(){
             return{
-                tamu:[]
+                tamu:[],
+                listTamu:[],
+                slide:false
             }
         },
        methods: {
@@ -44,23 +74,48 @@
             let that=this;
             db.collection('qr').doc('WVBWwHV1Qjq6d73BGGgO').onSnapshot(res=>{
                 let id =res.data().id_qr;
+                this.slide=true;
                 db.collection('tamu').doc(res.data().id_qr).onSnapshot(res2=>{
                     let data=res2.data()
                     that.tamu= data
-                    document.querySelectorAll('.tamu').forEach(e=>{
-                        e.classList.toggle('animate__backInDown')
-                    })
                     setTimeout(() => {
-                        document.querySelectorAll('.tamu').forEach(e=>{
-                            e.classList.toggle('animate__backInDown')
-                        })                        
-                    }, 1000);
+                        that.slide=false;
+                        that.$forceUpdate();
+                    }, 5000);
+                    // document.querySelectorAll('.tamu').forEach(e=>{
+                    //     e.classList.toggle('animate__backInLeft')
+                    // })
+                    // setTimeout(() => {
+                    //     document.querySelectorAll('.tamu').forEach(e=>{
+                    //         e.classList.toggle('animate__backInDown')
+                    //     })                        
+                    // }, 1000);
                 })
+            })
+        },
+        async getData2(){
+            db.collection('tamu').onSnapshot(res=>{
+                let data = res.docs.map(e=>e.data())
+                this.listTamu=data;
             })
         }
        },
        mounted() {
         this.getData();
+        this.getData2();
+        setTimeout(() => {
+            var splide = new Splide( '.splide', {
+                type   : 'loop',
+                drag   : 'free',
+                focus  : 'center',
+                perPage: 1,
+                autoScroll: {
+                    speed: 2,
+                },
+                });
+
+            splide.mount(window.splide.Extensions);
+        }, 1000);
        },
      }).mount('#app')
    </script>
