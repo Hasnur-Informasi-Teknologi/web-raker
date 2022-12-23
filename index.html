@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./all.css">
 </head>
-<body>
+<body >
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <img src="assets/background.gif" style="width:100vw;height:100vh;position:absolute;z-index:-1;" alt="">
    <div id="app">
-        <!-- <div style="height:100vh;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg foto"> -->
-        <div style="height:100vh;" class="foto text-center">
-            <h1 class="tamu animate__animated ">{{tamu['nama']}} - {{tamu['jabatan']}}</h1>
+        <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
             <!-- <h1>{{tamu['jabatan']}}</h1> -->
-            <!-- <div style="width:100%;" class="text-center"> -->
+            <div style="width:100%;" class="text-center">
+                <br>
+                <br>
+                <h1 class="tamu animate__animated ">{{tamu['nama']}} <br> {{tamu['jabatan']}}</h1>
                 <!-- <p class="my-0 font-semibold text-2xl animate__animated  tamu">
                     {{tamu['nama']}}
                 </p>
@@ -23,8 +25,7 @@
                     {{tamu['jabatan']}}
                 </p> -->
 
-            <!-- </div> -->
-        </div>
+            </div>
    </div>
    <script type="module">
     import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";

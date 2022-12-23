@@ -1,8 +1,9 @@
-.foto{
+body{
+  width: 100vw;
     background-image: url(assets/background.gif);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     text-align: center;
 }
 /* 
