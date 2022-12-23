@@ -6,33 +6,32 @@ body{
     background-size: contain;
     text-align: center;
 }
-/* 
+
 :root {
     --bg-color: hsl(49 37% 94%);
     --typewriterSpeed: 6s;
     --typewriterCharacters: 24;
   }
   
-body {
+/* body {
     margin: 0;
     font-family: "Source Sans Pro", sans-serif;
     min-height: 100vh;
     place-content: center;
     text-align: center;
     background: var(--bg-color);
-}
+} */
   
 h1 {
-    font-size: clamp(1rem, 3vw + 1rem, 4rem);
-    position: relative;
-    top: 500px;
-    left: 280px;
+    /* font-size: clamp(1rem, 3vw + 1rem, 4rem); */
+    /* color: blue; */
+    line-height: normal;
+    font-size: 5rem;
+    font-weight: bold;
     font-family: "Source Code Pro", monospace;
-    width: max-content;
-    padding-bottom: 20px;
-}
+  }
   
-h1::before,
+/* h1::before,
 h1::after {
     content: "";
     position: absolute;
@@ -40,31 +39,22 @@ h1::after {
     right: 0;
     bottom: 0;
     left: 0;
-}
-  
+} */
+/*   
 h1::before {
     background: var(--bg-color);
     animation: typewriter var(--typewriterSpeed)
         steps(var(--typewriterCharacters)) 1s forwards;
-}
+} */
   
-h1::after {
+/* h1::after {
     width: 0.125em;
     background: black;
     animation: typewriter var(--typewriterSpeed)
         steps(var(--typewriterCharacters)) 1s forwards,
         blink 750ms steps(var(--typewriterCharacters)) infinite;
-}
-  
-.subtitle {
-    color: hsl(0 0% 0% / 0.7);
-    font-size: 2rem;
-    font-weight: 400;
-    opacity: 0;
-    transform: translateY(3rem);
-    animation: fadeInUp 2s ease calc(var(--typewriterSpeed) + 2s) forwards;
-}
-  
+} */
+/*   
   @keyframes typewriter {
     to {
       left: 100%;
@@ -82,6 +72,6 @@ h1::after {
       opacity: 1;
       transform: translateY(0);
     }
-  }
+  } */
   
-   */
+  
