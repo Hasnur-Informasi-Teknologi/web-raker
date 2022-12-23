@@ -17,7 +17,10 @@
             <div style="width:100%;" class="text-center">
                 <br>
                 <br>
-                <h1 class="tamu animate__animated ">{{tamu['nama']}} <br> {{tamu['jabatan']}}</h1>
+                <div class="animate__animated animate__bounce animate__infinite animasi">
+                    <h1 class="animate__animated animate__fadeInLeftBig">{{tamu['nama']}} </h1>
+                    <h1 class="animate__animated animate__backInDown">{{tamu['jabatan']}}</h1>
+                </div>
                 <!-- <p class="my-0 font-semibold text-2xl animate__animated  tamu">
                     {{tamu['nama']}}
                 </p>
@@ -55,14 +58,14 @@
                 db.collection('tamu').doc(res.data().id_qr).onSnapshot(res2=>{
                     let data=res2.data()
                     that.tamu= data
-                    document.querySelectorAll('.tamu').forEach(e=>{
-                        e.classList.toggle('animate__backInDown')
-                    })
-                    setTimeout(() => {
-                        document.querySelectorAll('.tamu').forEach(e=>{
-                            e.classList.toggle('animate__backInDown')
-                        })                        
-                    }, 1000);
+                    // document.querySelectorAll('.tamu').forEach(e=>{
+                    //     e.classList.toggle('animate__backInLeft')
+                    // })
+                    // setTimeout(() => {
+                    //     document.querySelectorAll('.tamu').forEach(e=>{
+                    //         e.classList.toggle('animate__backInDown')
+                    //     })                        
+                    // }, 1000);
                 })
             })
         }
