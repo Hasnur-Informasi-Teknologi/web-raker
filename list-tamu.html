@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>List Tamu</title>
     <link rel="stylesheet" href="./all.css">
 </head>
 <body>
@@ -57,7 +57,7 @@
                         <input type="text" id="search" name="search" class="form-control p-2 rounded-lg shadow" placeholder="search" v-model="search" >
                     </div>
                     <div v-for="(item, index) in td" :key="index+'tamu'" class="my-2">
-                        <div @click="showQR(item)" class="my-0 hover:bg-blue-400 cursor-pointer font-semibold shadow rounded-lg p-3 animate__animated  tamu">
+                        <div @click="showQR(item)" class="my-0 hover:bg-blue-400 cursor-pointer font-semibold shadow text-xs rounded-lg p-2 animate__animated  tamu">
                             {{item['nama']}} -  {{item['jabatan']}}
                         </div>
                     </div>
