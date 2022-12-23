@@ -1,11 +1,11 @@
-body{
+/* body{
   width: 100vw;
     background-image: url(assets/background.gif);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     text-align: center;
-}
+} */
 /* 
 :root {
     --bg-color: hsl(49 37% 94%);

@@ -10,21 +10,13 @@
 </head>
 <body >
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-   <img src="assets/background.gif" style="width:100vw;height:100vh;position:absolute;z-index:-1;" alt="">
    <div id="app">
-        <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
-            <!-- <h1>{{tamu['jabatan']}}</h1> -->
+       <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
+        <img src="assets/background.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
             <div style="width:100%;" class="text-center">
                 <br>
                 <br>
                 <h1 class="tamu animate__animated ">{{tamu['nama']}} <br> {{tamu['jabatan']}}</h1>
-                <!-- <p class="my-0 font-semibold text-2xl animate__animated  tamu">
-                    {{tamu['nama']}}
-                </p>
-                <p class="my-0 font-semibold text-2xl animate__animated tamu">
-                    {{tamu['jabatan']}}
-                </p> -->
-
             </div>
    </div>
    <script type="module">
