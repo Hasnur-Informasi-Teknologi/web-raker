@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:ital,wght@0,100;1,900&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
 
 body{
   width: 100vw;
-    background-image: url(assets/background.gif);
+    /* background-image: url(assets/Background_Raker.gif); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -25,12 +26,14 @@ body{
   
 h1 {
     margin: 0;
-    color: rgba(5, 34, 77, .85);
+    /* color: rgba(5, 34, 77, .85); */
+    color: black;
     text-shadow: 4px 2px 4px rgba(5, 34, 77, 0.7);
     line-height: normal;
     font-size: 5rem;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lora', serif;
+    /* font-family: 'Montserrat', sans-serif; */
     text-transform: uppercase;
   }
   
