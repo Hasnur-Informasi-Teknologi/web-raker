@@ -7,6 +7,19 @@
     <title>Document</title>
     <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkalami&family=Lustria&display=swap" rel="stylesheet">
+    <style>
+        .style-nama{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size:28px;
+            color:#2C5B9A;
+            margin-bottom: 4px;
+            letter-spacing:7px;word-spacing: 6px;
+            font-family: 'Lustria', serif;
+        }
+    </style>
 </head>
 <body >
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -15,14 +28,14 @@
    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
    <div id="app">
        <div v-if="slide" style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
-            <img src="assets/Background_Raker.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
-            <div style="width:100%;" class="text-center">
+            <img src="assets/bgNew.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
+            <div style="width:100%;" class="text-left">
                 <br>
                 <br>
-                <div class="animate__animated animate__bounce animate__infinite animasi">
-                    <h1 class="animate__animated animate__fadeInRightBig">Welcome</h1>
-                    <h1 class="animate__animated animate__fadeInLeftBig">{{tamu['nama']}} </h1>
-                    <h1 class="animate__animated animate__backInDown">{{tamu['jabatan']}}</h1>
+                <div class="animate__animated animate__bounce animate__infinite animasi " style="margin-bottom:29vh;margin-left:5.9vw;">
+                    <h1 class="style-nama font-semibold animate__animated animate__fadeInRightBig">Selamat Datang</h1>
+                    <h1 class="style-nama font-semibold animate__animated animate__fadeInLeftBig">{{tamu['nama']}} </h1>
+                    <h1 class="style-nama font-semibold animate__animated animate__backInDown">{{tamu['jabatan']}}</h1>
                 </div>
             </div>
     </div>
@@ -33,14 +46,14 @@
                     <ul class="splide__list">
                         <li class="splide__slide"  v-for="(item, index) in listTamu" :key="index+'listamu'">
                             <div style="height:100vh;width:100vw;" class="d-flex justify-content-center align-items-center shadow-lg rounded-lg ">
-                                    <img src="assets/Background_Raker.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
-                                    <div style="width:100%;" class="text-center">
+                                    <img src="assets/bgNew.gif" style="width:100%;height:100%;position:absolute;z-index:-1;" alt="">
+                                    <div style="width:100%;" class="text-left">
                                         <br>
                                         <br>
-                                        <div class="animate__animated  animasi">
-                                            <h1 class="animate__animated animate__fadeInRightBig">Welcome</h1>
-                                            <h1 class="animate__animated animate__fadeInLeftBig">{{item['nama']}} </h1>
-                                            <h1 class="animate__animated animate__backInDown">{{item['jabatan']}}</h1>
+                                        <div class="animate__animated  animasi " style="margin-bottom:29vh;margin-left:5.7vw;">
+                                            <h1 class="style-nama font-semibold animate__animated animate__fadeInRightBig">Selamat Datang</h1>
+                                            <h1 class="style-nama font-semibold animate__animated animate__fadeInLeftBig">{{item['nama']}} </h1>
+                                            <h1 class="style-nama font-semibold animate__animated animate__backInDown">{{item['jabatan']}}</h1>
                                         </div>
                                     </div>
                             </div>
@@ -54,14 +67,8 @@
    <script type="module">
     import "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
     import  'https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js';
-    const firebaseConfig = {
-        apiKey: "AIzaSyCmRzJqD28EwB26YvKyLo07V7DxzxR08J8",
-        authDomain: "raker-5a160.firebaseapp.com",
-        projectId: "raker-5a160",
-        storageBucket: "raker-5a160.appspot.com",
-        messagingSenderId: "1073917849528",
-        appId: "1:1073917849528:web:07d3551851513bb16ca94d"
-    };
+    let data = await fetch('./assets/loading.js').then(res=>res.text());
+    const firebaseConfig = JSON.parse(data);
     const app=firebase.initializeApp(firebaseConfig)
     const db = app.firestore();
      const { createApp } = Vue
